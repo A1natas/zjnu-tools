@@ -6,6 +6,8 @@ import os
 
 url="192.168.1.1"       #路由器网关url
 
+passwd=""               #路由器管理密码
+
 yidongusername=""       #移动账号
 
 yidongpassword=""       #移动密码
@@ -116,7 +118,7 @@ url0 = 'http://'+url+'/cgi-bin/luci/rpc/auth'
 
 data = {
     "method":"login",
-    "params":["root","password"]
+    "params":["root",passwd]
 }
 
 token = json.loads(requests.post(url0,data=json.dumps(data)).text)['result']

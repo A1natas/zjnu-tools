@@ -2,26 +2,26 @@ import requests
 import json
 import os
 
-#ÔÚ´Ë´¦ÊäÈëÅäÖÃ¼´¿ÉÊ¹ÓÃ
+#åœ¨æ­¤å¤„è¾“å…¥é…ç½®å³å¯ä½¿ç”¨
 
-url="192.168.1.1"       #Â·ÓÉÆ÷Íø¹Øurl
+url="192.168.1.1"       #è·¯ç”±å™¨ç½‘å…³urlï¼Œopenwrtä¸€èˆ¬æ˜¯10.0.0.1ï¼Œä¹Ÿæœ‰192.168.1.1çš„
 
-passwd=""               #Â·ÓÉÆ÷¹ÜÀíÃÜÂë
+passwd=""               #è·¯ç”±å™¨ç®¡ç†å¯†ç ï¼Œopenwrté»˜è®¤åº”è¯¥æ˜¯passwordï¼ˆçœ‹å›ºä»¶ä½œè€…ï¼‰
 
-yidongusername=""       #ÒÆ¶¯ÕËºÅ
+yidongusername=""       #ç§»åŠ¨è´¦å·ï¼Œé»˜è®¤åº”è¯¥æ˜¯jhwcl+æ‰‹æœºåå…«ä½
 
-yidongpassword=""       #ÒÆ¶¯ÃÜÂë
+yidongpassword=""       #ç§»åŠ¨å¯†ç ï¼Œé»˜è®¤åº”è¯¥æ˜¯æ‰‹æœºåå…­ä½æˆ–è€…æ˜¯å…­ä½æ•°ç”Ÿæ—¥æˆ–è€…æ˜¯123456
 
-yidongservice=""        #ÒÆ¶¯·şÎñÃû
+yidongservice=""        #ç§»åŠ¨æœåŠ¡åï¼Œæå›­åº”è¯¥æ˜¯è¿™ä¸ªä¸œè¥¿ï¼šJHDY-GSXY-MX960-1
 
-dianxinusername=""      #µçĞÅÕËºÅ
+dianxinusername=""      #ç”µä¿¡è´¦å·ï¼Œæ‰¾è¥ä¸šå…çœ‹
 
-dianxinservice=""       #µçĞÅ·şÎñÃû£¬ÉÁÑ¶Ò»°ãÁô¿Õ¼´¿É
+dianxinservice=""       #ç”µä¿¡æœåŠ¡åï¼Œé—ªè®¯ä¸€èˆ¬ç•™ç©ºå³å¯
 
-#µçĞÅÃÜÂëÓÉÓÚ¾­³£»»£¬ÔÚ³ÌĞòÄÚÊäÈë¼´¿É
+#ç”µä¿¡å¯†ç ç”±äºç»å¸¸æ¢ï¼Œåœ¨ç¨‹åºå†…è¾“å…¥å³å¯
 
 
-#»ñÈ¡idÄÚÈİ
+#è·å–idå†…å®¹
 def get(id):
     url1='http://'+url+'/cgi-bin/luci/rpc/uci?auth='+token
     
@@ -34,7 +34,7 @@ def get(id):
 
     return getitem
 
-#»ñÈ¡ËùÓĞĞÅÏ¢
+#è·å–æ‰€æœ‰ä¿¡æ¯
 def getall():
     username=get('username')
     password=get('password')
@@ -44,7 +44,7 @@ def getall():
     print("password:"+str(password))
     print("service:"+str(service))
 
-#ÉèÖÃidÄÚÈİ
+#è®¾ç½®idå†…å®¹
 def set(id,content):
     url1='http://'+url+'/cgi-bin/luci/rpc/uci?auth='+token
 
@@ -57,7 +57,7 @@ def set(id,content):
 
     return setitem
 
-#ÉèÖÃ³ÉÒÆ¶¯Íø
+#è®¾ç½®æˆç§»åŠ¨ç½‘
 def yidong():
     result1=set("username",yidongusername)
     result2=set("password",yidongpassword)
@@ -68,7 +68,7 @@ def yidong():
     else:
         print('error,set again')
 
-#ÉèÖÃ³ÉµçĞÅÍø
+#è®¾ç½®æˆç”µä¿¡ç½‘
 def dianxin(id):
     result1=set("username",dianxinusername)
     result2=set("password",id)
@@ -78,7 +78,7 @@ def dianxin(id):
         print("set success")
     else:
         print('error,set again')
-#ÖØÆôwanÍø¿Ú£¨¶ÏÍøµÄÊ±ºòÓÃ£¬ÅÅ³ıÂ·ÓÉÆ÷ÎÊÌâ£©
+#é‡å¯wanç½‘å£ï¼ˆæ–­ç½‘çš„æ—¶å€™ç”¨ï¼Œæ’é™¤è·¯ç”±å™¨é—®é¢˜ï¼‰
 def restartwan():
     url2='http://'+url+'/cgi-bin/luci/rpc/sys?auth='+token
 
@@ -93,7 +93,7 @@ def restartwan():
         print("Reboot success")
     else:
         print("Reboot failed")
-#Ìá½»ËùÓĞÉèÖÃ
+#æäº¤æ‰€æœ‰è®¾ç½®
 def commitsettings():
     url1='http://'+url+'/cgi-bin/luci/rpc/uci?auth='+token
 
@@ -105,15 +105,15 @@ def commitsettings():
     commitresult=json.loads(requests.post(url1,data=json.dumps(commit)).text)['result']
 
     return commitresult
-#²Ëµ¥
+#èœå•
 def menu():
-    print("1.µçĞÅ¸ÄÃÜÂë")
-    print("2.¸ÄÒÆ¶¯Íø£¨ÍíÉÏ¶ÏÍø£©")
-    print("3.ÖØÆôÍøÂç£¨µôÏßµÄÊ±ºòÓÃ£©")
-    print("4.»ñÈ¡µ±Ç°ÕËºÅÃÜÂë×´Ì¬")
-    print("5.ÍË³ö")
+    print("1.ç”µä¿¡æ”¹å¯†ç ")
+    print("2.æ”¹ç§»åŠ¨ç½‘ï¼ˆæ™šä¸Šæ–­ç½‘ï¼‰")
+    print("3.é‡å¯ç½‘ç»œï¼ˆæ‰çº¿çš„æ—¶å€™ç”¨ï¼‰")
+    print("4.è·å–å½“å‰è´¦å·å¯†ç çŠ¶æ€")
+    print("5.é€€å‡º")
 
-#»ñÈ¡token
+#è·å–token
 url0 = 'http://'+url+'/cgi-bin/luci/rpc/auth'
 
 data = {

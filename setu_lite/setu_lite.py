@@ -1,4 +1,19 @@
 #utf-8
+help_msg = '''
+==================================
+||                              ||
+||   欢迎使用杰哥色图加密脚本!  ||
+||                              ||
+==================================
+
+可控参数：
+    -h -help 查看帮助
+    -k 设置秘钥(默认114514)
+    -o 设置输出文件名(不支持批量加密)
+    -l 设置加密强度[1-x](默认40,数字越小加密越强，最大不超过min(横向分辨率,纵向分辨率))
+    -d 删除原图
+    -x-only 只交换行像素
+    -y-only 只交换纵像素'''
 from numpy import *
 from matplotlib import pyplot as plt
 from sys import argv
@@ -97,20 +112,7 @@ def img_encode(keys,inputpath,level,moreSafe_X,moreSafe_Y,delete_source,outfile=
 if __name__ == '__main__':
     args = list(argv)
     img_types = ['jpg','png','gif']
-    if len(args) <= 1 or "-help" in args:
-        help_msg = '''
-==================================
-||                              ||
-||   欢迎使用杰哥色图加密脚本!  ||
-||                              ||
-==================================
-可控参数：
-    -k 设置秘钥(默认114514)
-    -o 设置输出文件名(不支持批量加密)
-    -l 设置加密强度[1-x](默认40,数字越小加密越强，最大不超过min(横向分辨率,纵向分辨率))
-    -d 删除原图
-    -x-only 只交换行像素
-    -y-only 只交换纵像素'''
+    if len(args) <= 1 or "-help" in args or "-h" in args:
         print(help_msg.strip())
         exit()
     key = "114514"
@@ -120,7 +122,7 @@ if __name__ == '__main__':
     moreSecure_Y = True
     delete_source = False
     skip = False
-    for i in range(len(args)):
+    for i in range(1,len(args)):
         if skip:
             skip = False
             continue
@@ -164,5 +166,4 @@ if __name__ == '__main__':
         for thread in threads:
             thread.join()
     else:
-        print(outfile)
         img_encode(key,input_path,level,moreSecure_X,moreSecure_Y,delete_source,outfile)
